@@ -12,4 +12,5 @@ To run the emulator, you will need to supply a parameter file. Please
 see the included example "params.ini" for the format. You will also
 need to pass in the name of an output file on the command line.
 
-
+Please reference this paper: https://adsabs.net/abs/2015ApJ...810...35K
+if you use my code. 
