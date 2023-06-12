@@ -1,15 +1,17 @@
 # ShearEmu
 
-Source code for tangential shear emulator. Calculates P_gm(k) and
-xi_gm(r) using a 5 parameter Halo Occupation Distribution Model to
-model the galaxy catalog - these can then be used as inputs for
-galaxy-galaxy lensing, as contained in gamma_t.c. 
+Source code for tangential shear emulator. The emulator has been trained
+to predict the tangential shear from an N-body simulation based on on a 
+WMAP7 cosmology. It uses Gaussian Process regression to calculate P_gm(k) and xi_gm(r) 
+using a 5 parameter Halo Occupation Distribution Model to model the galaxy catalog 
+and then these can then be used to derive the tangential shear using gamma_t.c. 
 
-Please use the supplied Makefile. You will need GSL (any version with
-spline and linear algebra capabilities is fine).
+Please modify the supplied Makefile for your setup. You will need to 
+link to GSL (any version with spline and linear algebra capabilities is fine).
 
-To run the emulator, you will need to supply a parameter file. Please
-see the included example "params.ini" for the format. You will also
+To run the emulator, you will need to supply a parameter file containing the HOD
+parameters and the desired output redshift. 
+Please see the included example "params.ini" for the format. You will also
 need to pass in the name of an output file on the command line.
 
 Please reference this paper: https://adsabs.net/abs/2015ApJ...810...35K
