@@ -5,9 +5,16 @@
 double func(double x, double a0, double b1, double b2, double b3); 
 double func2(double x, double a0, double a1, double a2);
 
+
+
+
 int pade(int nk, double *k, double *Pk, int npts, double *k_out, double *Pk_out)
 {
-
+// This code calculates the pade approximant which is used to extrapolate the power spectrum
+// to higher k (beyond the emulator) for conversion to the two-point correlation function in configuration space
+//
+// Linear bias is assumed on large scales (k > 0.001), then the emulator is used and then the pade approximant
+  
   int i; 
   double x0, y0, x1, y1, x2, y2, x3, y3; 
 
@@ -64,7 +71,7 @@ int pade(int nk, double *k, double *Pk, int npts, double *k_out, double *Pk_out)
 
 /*   a0 = y0+b1*x0*y0+b2*x0*x0*y0+b3*x0*x0*x0*y0; */
 
-/*   fprintf(stderr, "%f %f %f\n", a0, a1, a2);  */
+
 
   //Straight up linear bias on large scales
   for (i = 0; i < 379; i++)
@@ -81,7 +88,8 @@ int pade(int nk, double *k, double *Pk, int npts, double *k_out, double *Pk_out)
   // Now do Pade approximation
   for(i = 709; i < npts; i++)
     {
-      double k = pow(10.,k_out[i]); 
+      double k = pow(10.,k_out[i]);
+      //      double k = k_out[i];
       //      double bias_ext = func(k, a0, b1, b2, b3); 
       double bias_ext= func2(k, a0, a1, a2); 
       Pk_out[i] = bias_ext*exp(-k/50); 
