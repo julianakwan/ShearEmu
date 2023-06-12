@@ -4,6 +4,10 @@
 
 int pk_to_xi(int nk, double *k, double *Pk, double *r_out, double *xi_out)
 {
+  // Converts power spectrum P(k) to correlation function xi(r)
+  // Recommended to use Pade approximant first in pade.c to extend power spectrum
+  // to k < 0.001 and k > 1. 
+  
   int n; 
   int max_sum = 300; 
 
@@ -27,7 +31,7 @@ int pk_to_xi(int nk, double *k, double *Pk, double *r_out, double *xi_out)
   gsl_spline_init (spline, k, Pkint, nk);
 
   int m; 
-  double r_min = 1; 
+  double r_min = 0.01; 
   double r_max = 200; 
 
   for (n = 1; n < max_sum; n++)
